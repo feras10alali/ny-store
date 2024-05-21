@@ -70,7 +70,7 @@
 			<a
 				href="/products?tag=Sediment Collection"
 				class="px-4 py-3 rounded-md hover:text-gray-600 cursor-pointer font-jura"
-				>Sediment Collection</a
+				>Rmel Collection</a
 			>
 			<a
 				href="/products?tag=Honor Collection"

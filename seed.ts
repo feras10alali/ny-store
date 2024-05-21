@@ -6,19 +6,18 @@ import {
 	productTag,
 	productToProductTag
 } from './src/lib/server/db/schema';
-import { drizzle } from 'drizzle-orm/planetscale-serverless';
-import { connect } from '@planetscale/database';
 import 'dotenv/config';
+import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
+const connection = await mysql.createConnection({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USERNAME,
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+});
+const db = drizzle(connection);
 
 const seed = async () => {
-	// crete db client
-	const connection = connect({
-		host: process.env.DATABASE_HOST ?? '',
-		username: process.env.DATABASE_USERNAME ?? '',
-		password: process.env.DATABASE_PASSWORD ?? ''
-	});
-
-	const db = drizzle(connection);
 
 	// create some products
 	const products = [
@@ -35,7 +34,7 @@ const seed = async () => {
 		}
 	];
 
-	const insertedProducts = (await db.insert(product).values(products)).rows;
+	const insertedProducts = (await db.insert(product).values(products));
 
 	console.log(`INSERTED: ${insertedProducts.length} products`);
 
@@ -99,7 +98,7 @@ const seed = async () => {
 		}
 	];
 
-	const insertedProductSizes = (await db.insert(productSize).values(productSizes)).rows;
+	const insertedProductSizes = (await db.insert(productSize).values(productSizes));
 
 	console.log(`INSERTED: ${insertedProductSizes.length} product sizes`);
 
@@ -107,32 +106,32 @@ const seed = async () => {
 	// TODO CLOUDINARY: update the cloudinaryIds with your own cloudinary ids
 	const images = [
 		{
-			cloudinaryId: 'txvp48xxnytjd024vnye',
+			cloudinaryId: 'cld-sample',
 			width: 1920,
 			height: 1280,
 			productId: 'my_first_product'
 		},
 		{
-			cloudinaryId: 'gfgvqtml3oujz2biaf9a',
+			cloudinaryId: 'cld-sample-3',
 			width: 1920,
 			height: 1280,
 			productId: 'my_second_product'
 		},
 		{
-			cloudinaryId: 'zav59raocmm7xmxrzgc4',
+			cloudinaryId: 'cld-sample-4',
 			width: 1920,
 			height: 1280,
 			productId: 'my_first_product'
 		},
 		{
-			cloudinaryId: 'iquk9myxvuqrtc3xbwqc',
+			cloudinaryId: 'cld-sample-2',
 			width: 1920,
 			height: 1280,
 			productId: 'my_second_product'
 		}
 	];
 
-	const insertedImages = (await db.insert(productImage).values(images)).rows;
+	const insertedImages = (await db.insert(productImage).values(images));
 
 	console.log(`INSERTED: ${insertedImages.length} product images`);
 
@@ -148,7 +147,7 @@ const seed = async () => {
 		}
 	];
 
-	const insertedTags = (await db.insert(productTag).values(productTags)).rows;
+	const insertedTags = (await db.insert(productTag).values(productTags));
 
 	console.log(`INSERTED ${insertedTags.length} product tags`);
 
@@ -164,9 +163,11 @@ const seed = async () => {
 		}
 	];
 
-	const insertedTagsToProducts = (await db.insert(productToProductTag).values(productsToTags)).rows;
+	const insertedTagsToProducts = (await db.insert(productToProductTag).values(productsToTags));
 
 	console.log(`INSERTED ${insertedTagsToProducts.length} product tag relations`);
 };
 
-seed();
+seed().finally(async () => {
+  await connection.end()
+});
