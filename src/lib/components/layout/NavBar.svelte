@@ -96,7 +96,7 @@
 			target="_blank"
 			class="text-black uppercase font-jura flex flex-row items-center"
 		>
-			PDF
+			HELP
 		</a>
 
 		{#if user}
