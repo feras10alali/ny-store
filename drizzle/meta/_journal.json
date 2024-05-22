@@ -1,12 +1,12 @@
 {
-  "version": "5",
+  "version": "6",
   "dialect": "mysql",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1716323726280,
-      "tag": "0000_overjoyed_spirit",
+      "when": 1716395974000,
+      "tag": "0000_sticky_medusa",
       "breakpoints": true
     }
   ]

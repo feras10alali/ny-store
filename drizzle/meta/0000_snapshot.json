@@ -1,53 +1,9 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "0a57e959-307d-4b9f-870b-2108db1188b0",
+  "id": "1db758ae-b80c-474b-80c0-209ca2a4cecc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "email_list": {
-      "name": "email_list",
-      "columns": {
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "subscribed_at": {
-          "name": "subscribed_at",
-          "type": "datetime",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "unsubscribed_at": {
-          "name": "unsubscribed_at",
-          "type": "datetime",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "key": {
-          "name": "key",
-          "type": "varchar(20)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "email_list_email": {
-          "name": "email_list_email",
-          "columns": [
-            "email"
-          ]
-        }
-      },
-      "uniqueConstraints": {}
-    },
     "order": {
       "name": "order",
       "columns": {
@@ -471,28 +427,42 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "varchar(100)",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
         "user_id": {
           "name": "user_id",
-          "type": "varchar(100)",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
         "expires_at": {
           "name": "expires_at",
-          "type": "timestamp",
+          "type": "datetime",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "session_user_id_user_id_fk": {
+          "name": "session_user_id_user_id_fk",
+          "tableFrom": "session",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {
         "session_id": {
           "name": "session_id",
@@ -513,30 +483,9 @@
           "notNull": true,
           "autoincrement": false
         },
-        "provider": {
-          "name": "provider",
-          "type": "enum('google','github')",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "provider_id": {
-          "name": "provider_id",
+        "hashed_password": {
+          "name": "hashed_password",
           "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "first_name": {
-          "name": "first_name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "last_name": {
-          "name": "last_name",
-          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -546,7 +495,8 @@
           "type": "boolean",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": false,
+          "default": false
         },
         "email": {
           "name": "email",
@@ -566,21 +516,14 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "user_provider_provider_id_pk": {
-          "name": "user_provider_provider_id_pk",
+        "user_id": {
+          "name": "user_id",
           "columns": [
-            "provider",
-            "provider_id"
+            "id"
           ]
         }
       },
       "uniqueConstraints": {
-        "user_id_unique": {
-          "name": "user_id_unique",
-          "columns": [
-            "id"
-          ]
-        },
         "user_email_unique": {
           "name": "user_email_unique",
           "columns": [
@@ -596,7 +539,6 @@
       }
     }
   },
-  "schemas": {},
   "_meta": {
     "schemas": {},
     "tables": {},

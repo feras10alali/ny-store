@@ -24,7 +24,7 @@ export const load = async ({ params }) => {
 
 	// get the primary image for the product
 	const primaryImage = await db.query.productImage.findFirst({
-		where: and(eq(productImage.isPrimary, true), eq(productImage.productId, params.productId))
+		where: and(eq(productImage.productId, params.productId))
 	});
 
 	if (!firstProduct) {
@@ -32,6 +32,6 @@ export const load = async ({ params }) => {
 			message: 'Not found'
 		});
 	}
-
+	console.log({ product: firstProduct, primaryImage });
 	return { product: firstProduct, primaryImage };
 };

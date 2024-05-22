@@ -11,33 +11,28 @@ import {
 	datetime
 } from 'drizzle-orm/mysql-core';
 
-export const user = mysqlTable(
-	'user',
-	{
-		id: varchar('id', { length: 100 }).unique().notNull(),
-		provider: mysqlEnum('provider', ['google', 'github']).notNull(),
-		providerId: varchar('provider_id', { length: 255 }).notNull(),
-		firstName: varchar('first_name', { length: 100 }).notNull(),
-		lastName: varchar('last_name', { length: 100 }).notNull(),
-		isAdmin: boolean('is_admin').notNull(),
-		email: varchar('email', { length: 100 }).notNull().unique(),
-		stripeCustomerId: varchar('stripe_customer_id', { length: 100 }).unique()
-	},
-	(table) => {
-		return {
-			pk: primaryKey({ columns: [table.provider, table.providerId] })
-		};
-	}
-);
+export const user = mysqlTable('user', {
+	id: varchar('id', { length: 100 }).primaryKey(),
+	hashedPassword: varchar('hashed_password', { length: 255 }).notNull(),
+	isAdmin: boolean('is_admin').notNull().default(false),
+	email: varchar('email', { length: 100 }).notNull().unique(),
+	stripeCustomerId: varchar('stripe_customer_id', { length: 100 }).unique()
+});
 
 export const userRelations = relations(user, ({ many }) => ({
 	sessions: many(session)
 }));
 
 export const session = mysqlTable('session', {
-	id: varchar('id', { length: 100 }).primaryKey(),
-	userId: varchar('user_id', { length: 100 }).notNull(),
-	expiresAt: timestamp('expires_at').notNull()
+	id: varchar('id', {
+		length: 255
+	}).primaryKey(),
+	userId: varchar('user_id', {
+		length: 255
+	})
+		.notNull()
+		.references(() => user.id),
+	expiresAt: datetime('expires_at').notNull()
 });
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -46,14 +41,6 @@ export const sessionRelations = relations(session, ({ one }) => ({
 		references: [user.id]
 	})
 }));
-
-export const emailList = mysqlTable('email_list', {
-	email: varchar('email', { length: 255 }).primaryKey(),
-	subscribedAt: datetime('subscribed_at').notNull(),
-	unsubscribedAt: datetime('unsubscribed_at'),
-	// used to unsub
-	key: varchar('key', { length: 20 }).notNull()
-});
 
 export const product = mysqlTable('product', {
 	id: varchar('id', { length: 100 }).primaryKey(),

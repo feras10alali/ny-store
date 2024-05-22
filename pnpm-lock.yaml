@@ -53,6 +53,9 @@ importers:
       lucide-svelte:
         specifier: ^0.294.0
         version: 0.294.0(svelte@4.2.9)
+      mode-watcher:
+        specifier: ^0.3.0
+        version: 0.3.0(svelte@4.2.9)
       mysql2:
         specifier: ^3.9.1
         version: 3.9.1
@@ -74,6 +77,9 @@ importers:
       svelte-cloudinary:
         specifier: ^1.2.1
         version: 1.2.1(svelte@4.2.9)
+      svelte-radix:
+        specifier: ^1.1.0
+        version: 1.1.0(svelte@4.2.9)
       tailwind-merge:
         specifier: ^2.2.1
         version: 2.2.1
@@ -3099,6 +3105,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  mode-watcher@0.3.0:
+    resolution: {integrity: sha512-k8jjuTx94HaaRKWO6JDf8wL761hFatrTIHJKl+E+3JWcnv+GnMBH062zcLsy0lbCI3n7RZxxHaWi66auFnUO4g==}
+    peerDependencies:
+      svelte: ^4.0.0
+
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
     engines: {node: '>=4'}
@@ -3843,6 +3854,11 @@ packages:
         optional: true
       typescript:
         optional: true
+
+  svelte-radix@1.1.0:
+    resolution: {integrity: sha512-kyE9wZiJV937INGb+wiBkAjmGtQUUYRPkVL2Q+/gj+9Vog1Ewd2wNvNmpNMUd+c+euxoc5u5YZMuCUgky9EUPw==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0 || ^5.0.0
 
   svelte@4.2.9:
     resolution: {integrity: sha512-hsoB/WZGEPFXeRRLPhPrbRz67PhP6sqYgvwcAs+gWdSQSvNDw+/lTeUJSWe5h2xC97Fz/8QxAOqItwBzNJPU8w==}
@@ -6964,6 +6980,10 @@ snapshots:
 
   mkdirp@1.0.4: {}
 
+  mode-watcher@0.3.0(svelte@4.2.9):
+    dependencies:
+      svelte: 4.2.9
+
   mri@1.2.0: {}
 
   mrmime@2.0.0: {}
@@ -7770,6 +7790,10 @@ snapshots:
       postcss: 8.4.33
       postcss-load-config: 4.0.2(postcss@8.4.33)
       typescript: 5.3.3
+
+  svelte-radix@1.1.0(svelte@4.2.9):
+    dependencies:
+      svelte: 4.2.9
 
   svelte@4.2.9:
     dependencies:

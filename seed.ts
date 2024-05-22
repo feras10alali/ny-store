@@ -7,18 +7,17 @@ import {
 	productToProductTag
 } from './src/lib/server/db/schema';
 import 'dotenv/config';
-import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2/promise";
+import { drizzle } from 'drizzle-orm/mysql2';
+import mysql from 'mysql2/promise';
 const connection = await mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USERNAME,
-  database: process.env.DATABASE_NAME,
-  password: process.env.DATABASE_PASSWORD,
+	host: process.env.DATABASE_HOST,
+	user: process.env.DATABASE_USERNAME,
+	database: process.env.DATABASE_NAME,
+	password: process.env.DATABASE_PASSWORD
 });
 const db = drizzle(connection);
 
 const seed = async () => {
-
 	// create some products
 	const products = [
 		{
@@ -34,7 +33,7 @@ const seed = async () => {
 		}
 	];
 
-	const insertedProducts = (await db.insert(product).values(products));
+	const insertedProducts = await db.insert(product).values(products);
 
 	console.log(`INSERTED: ${insertedProducts.length} products`);
 
@@ -47,8 +46,8 @@ const seed = async () => {
 			width: 12,
 			height: 12,
 			price: 5000,
-			stripeProductId: 'prod_OyCy8ckhrmV0IM',
-			stripePriceId: 'price_1OAGYBDVy0rtNA6WZ7fSwK2d',
+			stripeProductId: 'prod_Q9PxY6MRtNbGGq',
+			stripePriceId: 'price_1PJ77bLitspZaVceJrNY2Uwa',
 			productId: 'my_first_product'
 		},
 		{
@@ -56,8 +55,8 @@ const seed = async () => {
 			width: 16,
 			height: 16,
 			price: 7000,
-			stripeProductId: 'prod_OyCy8ckhrmV0IM',
-			stripePriceId: 'price_1OAGYBDVy0rtNA6WZ7fSwK2d',
+			stripeProductId: 'prod_Q9PxY6MRtNbGGq',
+			stripePriceId: 'price_1PJ77bLitspZaVceJrNY2Uwa',
 			productId: 'my_first_product'
 		},
 		{
@@ -65,8 +64,8 @@ const seed = async () => {
 			width: 24,
 			height: 24,
 			price: 10000,
-			stripeProductId: 'prod_OyCy8ckhrmV0IM',
-			stripePriceId: 'price_1OAGYBDVy0rtNA6WZ7fSwK2d',
+			stripeProductId: 'prod_Q9PxY6MRtNbGGq',
+			stripePriceId: 'price_1PJ77bLitspZaVceJrNY2Uwa',
 			productId: 'my_first_product'
 		},
 		{
@@ -74,8 +73,8 @@ const seed = async () => {
 			width: 12,
 			height: 12,
 			price: 5000,
-			stripeProductId: 'prod_OyCy8ckhrmV0IM',
-			stripePriceId: 'price_1OAGYBDVy0rtNA6WZ7fSwK2d',
+			stripeProductId: 'prod_Q9PxY6MRtNbGGq',
+			stripePriceId: 'price_1PJ77bLitspZaVceJrNY2Uwa',
 			productId: 'my_second_product'
 		},
 		{
@@ -83,8 +82,8 @@ const seed = async () => {
 			width: 16,
 			height: 16,
 			price: 7000,
-			stripeProductId: 'prod_OyCy8ckhrmV0IM',
-			stripePriceId: 'price_1OAGYBDVy0rtNA6WZ7fSwK2d',
+			stripeProductId: 'prod_Q9PxY6MRtNbGGq',
+			stripePriceId: 'price_1PJ77bLitspZaVceJrNY2Uwa',
 			productId: 'my_second_product'
 		},
 		{
@@ -92,13 +91,13 @@ const seed = async () => {
 			width: 24,
 			height: 24,
 			price: 10000,
-			stripeProductId: 'prod_OyCy8ckhrmV0IM',
-			stripePriceId: 'price_1OAGYBDVy0rtNA6WZ7fSwK2d',
+			stripeProductId: 'prod_Q9PxY6MRtNbGGq',
+			stripePriceId: 'price_1PJ77bLitspZaVceJrNY2Uwa',
 			productId: 'my_second_product'
 		}
 	];
 
-	const insertedProductSizes = (await db.insert(productSize).values(productSizes));
+	const insertedProductSizes = await db.insert(productSize).values(productSizes);
 
 	console.log(`INSERTED: ${insertedProductSizes.length} product sizes`);
 
@@ -131,7 +130,7 @@ const seed = async () => {
 		}
 	];
 
-	const insertedImages = (await db.insert(productImage).values(images));
+	const insertedImages = await db.insert(productImage).values(images);
 
 	console.log(`INSERTED: ${insertedImages.length} product images`);
 
@@ -147,7 +146,7 @@ const seed = async () => {
 		}
 	];
 
-	const insertedTags = (await db.insert(productTag).values(productTags));
+	const insertedTags = await db.insert(productTag).values(productTags);
 
 	console.log(`INSERTED ${insertedTags.length} product tags`);
 
@@ -163,11 +162,11 @@ const seed = async () => {
 		}
 	];
 
-	const insertedTagsToProducts = (await db.insert(productToProductTag).values(productsToTags));
+	const insertedTagsToProducts = await db.insert(productToProductTag).values(productsToTags);
 
 	console.log(`INSERTED ${insertedTagsToProducts.length} product tag relations`);
 };
 
 seed().finally(async () => {
-  await connection.end()
+	await connection.end();
 });

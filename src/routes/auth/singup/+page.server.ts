@@ -1,57 +1,53 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types.js';
+import { z } from 'zod';
+import { lucia } from '$lib/server/auth.js';
 import { db } from '$lib/server/db/index.js';
 import { user } from '$lib/server/db/schema.js';
 import { Argon2id } from 'oslo/password';
-import { z } from 'zod';
-import { lucia } from '$lib/server/auth.js';
 
 export const load = async (event) => {
 	if (event.locals.session) {
 		redirect(307, '/profile');
 	}
 };
-
+let schema = z.object({
+	email: z.string().email(),
+	password: z.string().min(3),
+	confirm: z.string().min(3)
+});
 export const actions: Actions = {
 	default: async (event) => {
 		let formData = await event.request.formData();
 
-		let res = z
-			.object({
-				email: z.string().email(),
-				password: z.string().min(3)
-			})
-			.safeParse({
-				email: formData.get('email'),
-				password: formData.get('password')
-			});
+		let res = schema.safeParse({
+			email: formData.get('email'),
+			password: formData.get('password'),
+			confirm: formData.get('confirm')
+		});
 		console.log(res);
 		if (!res.success) {
 			return fail(400, {
 				success: false
 			});
 		}
-		const { data } = res;
 
+		if (res.data.password != res.data.confirm) {
+			return fail(400, {
+				success: false
+			});
+		}
+		const passwordHash = await new Argon2id().hash(res.data.password);
+		const userId = crypto.randomUUID(); // 16 characters long
+		console.log(res);
 		try {
-			let u = await db.query.user.findFirst({
-				where({ email }, { eq }) {
-					return eq(email, data.email as string);
-				}
+			await db.insert(user).values({
+				id: userId,
+				email: res.data.email,
+				hashedPassword: passwordHash
 			});
 
-			if (!u) {
-				return fail(400, {
-					success: false
-				});
-			}
-			let match = new Argon2id().verify(u.hashedPassword, data.password);
-			if (!match) {
-				return fail(400, {
-					success: false
-				});
-			}
-			const session = await lucia.createSession(u.id, {});
+			const session = await lucia.createSession(userId, {});
 			const sessionCookie = lucia.createSessionCookie(session.id);
 			event.cookies.set(sessionCookie.name, sessionCookie.value, {
 				path: '.',
@@ -63,6 +59,6 @@ export const actions: Actions = {
 				success: false
 			});
 		}
-		redirect(302, '/profile');
+		redirect(302, '/auth/login');
 	}
 };

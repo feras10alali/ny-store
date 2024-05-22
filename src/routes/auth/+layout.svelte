@@ -7,9 +7,8 @@
 		<div
 			class="lg:w-[800px] lg:h-[800px] rounded-xl overflow-hidden shadow-lg md:w-[300px] md:h-[300px] w-full h-auto"
 		>
-			<!-- CLD IMAGE SWITCH NEEDED -->
 			<CldImage
-				src="txvp48xxnytjd024vnye"
+				src="cld-sample-3"
 				width={1600}
 				height={1600}
 				alt="decoration image"

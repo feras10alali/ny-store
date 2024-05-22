@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button';
+	import { Button } from '$lib/components/ui/button/index.js';
 	import Logo from '$lib/client/images/logo_light.png';
 	import MobileLogo from '$lib/client/images/mobile_logo_light.png';
 	import { CldImage } from 'svelte-cloudinary';
@@ -43,11 +43,10 @@
 		id="drop-menu"
 	>
 		<div class="col-span-1 w-full overflow-hidden">
-			<!-- CLD IMAGE SWITCH NEEDED -->
 			<CldImage
 				width={500 * 2}
 				height={400 * 2}
-				src={'products/a3mazygrqkbbcoqnjszp' || 'https://via.placeholder.com/355x200'}
+				src={'cld-sample-3'}
 				alt="Description of my image"
 				class="shadow-md"
 				sizes="100vw"
@@ -66,16 +65,6 @@
 			<div class="px-4 py-0 rounded-md text-gray-500 font-extralight text-sm">Collections</div>
 			<a href="/products" class="px-4 py-3 rounded-md hover:text-gray-600 cursor-pointer font-jura"
 				>All Pieces</a
-			>
-			<a
-				href="/products?tag=Sediment Collection"
-				class="px-4 py-3 rounded-md hover:text-gray-600 cursor-pointer font-jura"
-				>Rmel Collection</a
-			>
-			<a
-				href="/products?tag=Honor Collection"
-				class="px-4 py-3 rounded-md hover:text-gray-600 cursor-pointer font-jura"
-				>Honor Collection</a
 			>
 		</div>
 	</div>
@@ -103,6 +92,7 @@
 			</svg>
 		</a>
 		<a href="/about/faq" class="text-black uppercase font-jura flex flex-row items-center"> FAQ </a>
+
 		{#if user}
 			<a href="/profile">
 				<svg

@@ -1,11 +1,3 @@
-CREATE TABLE `email_list` (
-	`email` varchar(255) NOT NULL,
-	`subscribed_at` datetime NOT NULL,
-	`unsubscribed_at` datetime,
-	`key` varchar(20) NOT NULL,
-	CONSTRAINT `email_list_email` PRIMARY KEY(`email`)
-);
---> statement-breakpoint
 CREATE TABLE `order` (
 	`stripe_order_id` varchar(100) NOT NULL,
 	`stripe_customer_id` varchar(100),
@@ -79,23 +71,21 @@ CREATE TABLE `product_to_product_tag` (
 );
 --> statement-breakpoint
 CREATE TABLE `session` (
-	`id` varchar(100) NOT NULL,
-	`user_id` varchar(100) NOT NULL,
-	`expires_at` timestamp NOT NULL,
+	`id` varchar(255) NOT NULL,
+	`user_id` varchar(255) NOT NULL,
+	`expires_at` datetime NOT NULL,
 	CONSTRAINT `session_id` PRIMARY KEY(`id`)
 );
 --> statement-breakpoint
 CREATE TABLE `user` (
 	`id` varchar(100) NOT NULL,
-	`provider` enum('google','github') NOT NULL,
-	`provider_id` varchar(255) NOT NULL,
-	`first_name` varchar(100) NOT NULL,
-	`last_name` varchar(100) NOT NULL,
-	`is_admin` boolean NOT NULL,
+	`hashed_password` varchar(255) NOT NULL,
+	`is_admin` boolean NOT NULL DEFAULT false,
 	`email` varchar(100) NOT NULL,
 	`stripe_customer_id` varchar(100),
-	CONSTRAINT `user_provider_provider_id_pk` PRIMARY KEY(`provider`,`provider_id`),
-	CONSTRAINT `user_id_unique` UNIQUE(`id`),
+	CONSTRAINT `user_id` PRIMARY KEY(`id`),
 	CONSTRAINT `user_email_unique` UNIQUE(`email`),
 	CONSTRAINT `user_stripe_customer_id_unique` UNIQUE(`stripe_customer_id`)
 );
+--> statement-breakpoint
+ALTER TABLE `session` ADD CONSTRAINT `session_user_id_user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE no action ON UPDATE no action;
