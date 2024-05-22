@@ -30,7 +30,7 @@
 			class="flex shadow-md rounded-lg overflow-hidden md:w-3/5 bg-white z-50 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-auto w-full flex-col md:flex-row"
 		>
 			<div class="md:w-1/2">
-				<CldImage src="cld-sample-5" width={1000} height={1000} objectFit="cover" />
+				<CldImage src="bxerkc84vu6jw3lf7ksn" width={1000} height={1000} objectFit="cover" />
 			</div>
 
 			<div class="md:w-1/2 p-4 flex flex-col">

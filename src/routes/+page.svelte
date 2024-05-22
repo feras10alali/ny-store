@@ -42,7 +42,7 @@
 			class="object-cover w-full h-[80vh] hidden sm:flex transition-all ease-in-out duration-300 bg-black"
 		>
 			<CldImage
-				src={'cld-sample-3'}
+				src={'j5jfxspmuzlwlkxrhh6w'}
 				width={1920}
 				height={900}
 				objectFit="cover"
@@ -54,7 +54,7 @@
 			class={`object-cover w-full h-[80vh] sm:hidden flex transition-all ease-in-out duration-300 bg-black`}
 		>
 			<CldImage
-				src={'cld-sample'}
+				src={'bxerkc84vu6jw3lf7ksn'}
 				width={700}
 				height={1000}
 				objectFit="cover"
@@ -109,7 +109,7 @@
 			tagLine: 'Honor our history',
 			productInfo: [
 				{
-					cloudinaryId: 'cld-sample',
+					cloudinaryId: 'v0cfo4ogplopushmmpaq',
 					secondaryCloudinary: 'cld-sample',
 					name: 'Molten Moon',
 					availableSizes: ['5x5', '4.8x6.4', '7.2x9.6', '11x11', '10.8x14.4'],
@@ -117,15 +117,15 @@
 					link: '/products/my_second_product'
 				},
 				{
-					cloudinaryId: 'cld-sample-2',
-					secondaryCloudinary: 'cld-sample-2',
+					cloudinaryId: 'bxerkc84vu6jw3lf7ksn',
+					secondaryCloudinary: 'bxerkc84vu6jw3lf7ksn',
 					name: 'Europan Frontier',
 					availableSizes: ['5x5', '4.8x6.4', '7.2x9.6'],
 					soldOutSizes: ['11x11', '10.8x14.4'],
 					link: '/products/my_first_product'
 				},
 				{
-					cloudinaryId: 'cld-sample-4',
+					cloudinaryId: 'v0cfo4ogplopushmmpaq',
 					secondaryCloudinary: 'cld-sample-4',
 					name: 'Molten Moon',
 					availableSizes: ['5x5', '4.8x6.4', '10.8x14.4'],
@@ -133,8 +133,8 @@
 					link: '/products/my_second_product'
 				},
 				{
-					cloudinaryId: 'cld-sample-3',
-					secondaryCloudinary: 'cld-sample-3',
+					cloudinaryId: 'bxerkc84vu6jw3lf7ksn',
+					secondaryCloudinary: 'bxerkc84vu6jw3lf7ksn',
 					name: 'Europan Frontier',
 					availableSizes: ['7.2x9.6', '11x11', '10.8x14.4'],
 					soldOutSizes: ['5x5', '4.8x6.4'],

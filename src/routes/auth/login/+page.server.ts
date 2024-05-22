@@ -45,7 +45,7 @@ export const actions: Actions = {
 					success: false
 				});
 			}
-			let match = new Argon2id().verify(u.hashedPassword, data.password);
+			let match = await new Argon2id().verify(u.hashedPassword, data.password);
 			if (!match) {
 				return fail(400, {
 					success: false

@@ -81,7 +81,7 @@
 			<Alert.Description>Please proceed to the cart to checkout.</Alert.Description>
 		</Alert.Root>
 	</div>
-	<SpecialOffer isSoldOut={data.isSoldOut} remaining={data.numberLeft} />
+	<!-- <SpecialOffer isSoldOut={data.isSoldOut} remaining={data.numberLeft} /> -->
 	<NavBar user={data.user} pieces={data.pieces} />
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<span on:mouseenter={handleRemoveMenu} class="grow bg-neutral-100">

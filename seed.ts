@@ -105,13 +105,13 @@ const seed = async () => {
 	// TODO CLOUDINARY: update the cloudinaryIds with your own cloudinary ids
 	const images = [
 		{
-			cloudinaryId: 'cld-sample',
+			cloudinaryId: 'bxerkc84vu6jw3lf7ksn',
 			width: 1920,
 			height: 1280,
 			productId: 'my_first_product'
 		},
 		{
-			cloudinaryId: 'cld-sample-3',
+			cloudinaryId: 'v0cfo4ogplopushmmpaq',
 			width: 1920,
 			height: 1280,
 			productId: 'my_second_product'
