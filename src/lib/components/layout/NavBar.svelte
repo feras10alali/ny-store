@@ -91,7 +91,13 @@
 				<path d="M7 21.7705L12 33.2288L17 21.7705H7Z" fill="black" />
 			</svg>
 		</a>
-		<a href="/about/faq" class="text-black uppercase font-jura flex flex-row items-center"> FAQ </a>
+		<a
+			href="/doc.pdf"
+			target="_blank"
+			class="text-black uppercase font-jura flex flex-row items-center"
+		>
+			PDF
+		</a>
 
 		{#if user}
 			<a href="/profile">
